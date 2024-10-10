@@ -1,0 +1,48 @@
+.header {
+  height: auto;
+  background: linear-gradient(35deg,#29b6f6,#00897b,#7b1fa2);
+  background-size: 300% 300%;
+  animation: animate 4s infinite alternate;
+  color: white;
+}
+
+//#3282a6 #ff6b6b #0000ff
+//#1b4f72 #1c2833 #4a235a
+//#311b92 #7b1fa2 #1976d2
+//#03a9f4 #0277bd #00897b
+//#29b6f6 #f06292
+
+@keyframes animate {
+  0%{
+    background-position: 0% 50%;
+  }
+  100%{
+    background-position: 100% 50%;
+  }
+}
+
+.card {
+  margin-top: 10px;
+  transition: all 0.4s;
+}
+
+.card:hover {
+  transform: scale(1.10);
+}
+
+.col{
+  margin-top: 10px;
+}
+
+.lg{
+  transition: all 0,4s;
+  margin: 2px;
+}
+
+.lg:hover {
+  transform: scale(1.10);
+}
+
+.cv {
+  margin: 10px;
+}

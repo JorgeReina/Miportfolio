@@ -12,3 +12,28 @@
 .back-to-top:hover { background:#1238c1; color:#fff; transform:translateY(-3px); }
 @media (max-width:760px) { .back-to-top { right:16px; bottom:16px; } }
 @media (prefers-reduced-motion:reduce) { .back-to-top { transition:none; } }
+
+.preferences { display:flex; align-items:center; gap:8px; }
+.preference { min-width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; border:1px solid #c9ced9; border-radius:5px; color:inherit; background:transparent; font:700 12px 'Segoe UI',sans-serif; cursor:pointer; }
+.preference:hover { border-color:#214ff2; color:#214ff2; }
+.theme-switch svg { width:20px; height:20px; }
+.dark { --ink:#f3f6ff; --blue:#a9bfff; --muted:#c2cbe0; background:#101728; color:var(--ink); }
+.dark .header,.dark .expertise { border-color:#36435d; }
+.dark .nav a:hover,.dark .social a:hover,.dark footer a:hover { color:#a9bfff; }
+.dark .intro,.dark .section-head>p,.dark .project>p,.dark .about-grid p:not(.eyebrow):not(.about-lead),.dark .timeline article p,.dark .education article p { color:#c2cbe0; }
+.dark .eyebrow,.dark .project-index,.dark .arrow,.dark em,.dark h2 span,.dark .brand span { color:#a9bfff; }
+.dark .hero-art { background:#24314c; }
+.dark .hero-art:before { background:#476ff5; }
+.dark .art-symbol span,.dark .art-bottom span:last-child { color:#a9bfff; }
+.dark .about { background:#1c2941; }
+.dark .timeline article,.dark .education article { border-color:#52617a; }
+.dark .timeline article>span,.dark .education article>span,.dark .expertise-inner span { color:#bdc9df; }
+.dark .tags span,.dark .stack span { border-color:#59677f; background:#24314a; color:#f3f6ff; }
+.dark .project-image { background:#263450; }
+.dark .preference { border-color:#7b8ba5; }
+.dark .preference:hover { color:#d1dcff; border-color:#d1dcff; }
+.dark .secondary { border-color:#a9b7cf; }
+.dark .primary { background:#315de8; color:#fff; }
+.dark .primary:hover { background:#5279fb; }
+.dark .dot { background:#a9bfff; }
+@media (max-width:760px) { .preferences { margin-left:auto; } .nav-link { margin-left:0; } }

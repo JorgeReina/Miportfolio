@@ -113,6 +113,8 @@ const translations = {
 })
 export class HomeComponent implements OnInit {
   showBackToTop = false;
+  showCookiePreferences = true;
+  private analyticsLoaded = false;
   language: Language = 'es';
   theme: Theme = 'light';
 
@@ -131,6 +133,14 @@ export class HomeComponent implements OnInit {
     } catch { /* Preferences are optional when storage is unavailable. */ }
     this.updateDocumentLanguage();
     this.onWindowScroll();
+    let preference: string | null = null;
+    try { preference = localStorage.getItem('portfolio-analytics-consent'); } catch { /* Ask again if storage is unavailable. */ }
+    if (preference === 'accepted') {
+      this.showCookiePreferences = false;
+      this.loadAnalytics();
+    } else if (preference === 'rejected') {
+      this.showCookiePreferences = false;
+    }
   }
 
   toggleLanguage(): void {
@@ -142,6 +152,47 @@ export class HomeComponent implements OnInit {
   toggleTheme(): void {
     this.theme = this.theme === 'light' ? 'dark' : 'light';
     this.savePreference('portfolio-theme', this.theme);
+  }
+
+  openCookiePreferences(): void {
+    this.showCookiePreferences = true;
+  }
+
+  chooseAnalytics(accepted: boolean): void {
+    try { localStorage.setItem('portfolio-analytics-consent', accepted ? 'accepted' : 'rejected'); }
+    catch { /* Consent applies only during this visit when storage is blocked. */ }
+    this.showCookiePreferences = false;
+    if (accepted) {
+      this.loadAnalytics();
+    } else {
+      const wasLoaded = this.analyticsLoaded;
+      this.removeAnalyticsCookies();
+      if (wasLoaded) window.location.reload();
+    }
+  }
+
+  private loadAnalytics(): void {
+    if (this.analyticsLoaded) return;
+    this.analyticsLoaded = true;
+    const w = window as Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void };
+    w.dataLayer = w.dataLayer || [];
+    w.gtag = function(...args: unknown[]) { w.dataLayer!.push(arguments); };
+    w.gtag('js', new Date());
+    w.gtag('config', 'G-N3JD2HJD5F', { allow_google_signals: false, allow_ad_personalization_signals: false });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-N3JD2HJD5F';
+    document.head.appendChild(script);
+  }
+
+  private removeAnalyticsCookies(): void {
+    document.cookie.split(';').forEach((item) => {
+      const name = item.trim().split('=')[0];
+      if (name === '_ga' || name.startsWith('_ga_')) {
+        document.cookie = name + '=; Max-Age=0; path=/; SameSite=Lax';
+        document.cookie = name + '=; Max-Age=0; path=/; domain=' + window.location.hostname + '; SameSite=Lax';
+      }
+    });
   }
 
   private savePreference(key: string, value: string): void {

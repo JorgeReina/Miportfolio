@@ -40,3 +40,10 @@
 
 .dark .nav-link { color:#f3f6ff; }
 .dark .nav-link:hover { color:#a9bfff; }
+
+.cookie-settings { background:transparent; border:0; color:inherit; font:inherit; font-size:12px; padding:0; text-decoration:underline; cursor:pointer; }
+.cookie-banner { position:fixed; z-index:100; left:16px; right:16px; bottom:16px; max-width:920px; margin:auto; display:flex; gap:24px; align-items:center; padding:20px 24px; background:#fff; color:#111c3c; border:1px solid #cbd2df; border-radius:8px; box-shadow:0 8px 30px rgba(0,0,0,.22); font-size:14px; }
+.cookie-copy { flex:1; } .cookie-copy strong { font-size:17px; } .cookie-copy p { margin:6px 0; line-height:1.45; } .cookie-copy a { color:#173ec0; text-decoration:underline; } .cookie-copy summary { cursor:pointer; font-weight:600; }
+.cookie-actions { display:flex; gap:10px; flex-wrap:wrap; } .cookie-actions button { border:1px solid #214ff2; background:#fff; color:#173ec0; padding:10px 14px; border-radius:5px; cursor:pointer; font-weight:700; } .cookie-actions button:hover { background:#eaf0ff; }
+.dark .cookie-banner { background:#1c2941; color:#f3f6ff; border-color:#65748e; } .dark .cookie-copy a { color:#c3d2ff; } .dark .cookie-actions button { background:#263450; border-color:#a9bfff; color:#fff; } .dark .cookie-actions button:hover { background:#354a70; }
+@media (max-width:760px) { .cookie-banner { flex-direction:column; align-items:stretch; max-height:75vh; overflow:auto; padding:16px; gap:12px; } .cookie-actions button { flex:1; } }
